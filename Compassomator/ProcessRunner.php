@@ -260,6 +260,9 @@ class ProcessRunner
         // so far there is remove/unchanged/create. because of the bash color codes before the actions and whitespace,
         // simply using trim() doesn't work. this is solely cosmetic and doesn't serve any higher purpose :D
         foreach (explode("\n", $output) as $line) {
+            if(strlen(trim($line)) === 0) {
+                continue;
+            }
             $this->output->writeln(sprintf('    %s', preg_replace('/\s+(remove|unchanged|create)/', '\1', $line)));
         }
     }

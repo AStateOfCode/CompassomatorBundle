@@ -39,19 +39,27 @@ abstract class ProcessUtils
     {
         $builder = new ProcessBuilder(array(
             'php',
-            'app/console',
-            'assetic:dump'
+            'app/console'
         ));
+
+        if($watch === true) {
+            // AsseticBundle 2.4+
+            if(class_exists('Symfony\Bundle\AsseticBundle\Command\WatchCommand')) {
+                $builder->add('assetic:watch');
+            } // AsseticBundle <= 2.3
+            else {
+                $builder->add('assetic:dump')->add('--watch');
+            }
+        }
+        else {
+            $builder->add('assetic:dump');
+        }
 
         if ($env !== null) {
             $builder->add('--env')->add($env);
         }
         if ($verbosity > 0) {
             $builder->add('-'.str_repeat('v', $verbosity));
-        }
-
-        if ($watch) {
-            $builder->add('--watch');
         }
 
         return $builder->getProcess();
