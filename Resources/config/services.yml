@@ -17,8 +17,6 @@ services:
         class: %asoc_compassomator.cache_warmer.class%
         arguments:
             - @asoc_compassomator.process_runner
-        tags:
-            - { name: kernel.cache_warmer, priority: 12 }
     asoc_compassomator.process_manager:
         class: %asoc_compassomator.process_manager.class%
         arguments:

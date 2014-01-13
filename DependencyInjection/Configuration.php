@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                 // but well, for the sake of configurability :D
                 ->scalarNode('assetic_css_dir')->defaultValue('%assetic.write_to%/css')->cannotBeEmpty()->end()
                 ->scalarNode('manage_assetic')->defaultFalse()->end()
+                ->scalarNode('cache_warmer_priority')->defaultValue(30)->end()
             ->end();
 
         return $treeBuilder;
