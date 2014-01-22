@@ -4,7 +4,6 @@ parameters:
     asoc_compassomator.process_manager.run_dir: %kernel.cache_dir%/../compassomator
     asoc_compassomator.process_runner.class: Asoc\CompassomatorBundle\Compassomator\ProcessRunner
     asoc_compassomator.cache_clearer.class: Asoc\CompassomatorBundle\CacheClearer\CacheClearer
-    asoc_compassomator.cache_warmer.class: Asoc\CompassomatorBundle\CacheWarmer\CacheWarmer
 
 services:
     asoc_compassomator.cache_clearer:
@@ -13,10 +12,6 @@ services:
             - @asoc_compassomator.process_runner
         tags:
             - { name: kernel.cache_clearer }
-    asoc_compassomator.cache_warmer:
-        class: %asoc_compassomator.cache_warmer.class%
-        arguments:
-            - @asoc_compassomator.process_runner
     asoc_compassomator.process_manager:
         class: %asoc_compassomator.process_manager.class%
         arguments:
