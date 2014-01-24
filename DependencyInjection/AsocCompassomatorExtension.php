@@ -30,5 +30,10 @@ class AsocCompassomatorExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $cacheWarmer = $container->getDefinition('asoc_compassomator.cache_warmer');
+        $cacheWarmer->addTag('kernel.cache_warmer', [
+            'priority' => $config['cache_warmer_priority']
+        ]);
     }
 }
